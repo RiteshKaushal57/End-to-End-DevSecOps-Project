@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mongodb
-          image: mongo
+          image: ritesh57/mongo
           ports:
             - containerPort: 27017
           volumeMounts:
