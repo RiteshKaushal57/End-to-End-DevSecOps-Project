@@ -2,23 +2,39 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
         app: backend
-    template:
-      metadata:
-        labels:
-          app: backend
-      spec:
-        containers:
-         - name: backend
-           image: ritesh57/application-code-backend
-           ports:
+    spec:
+      containers:
+        - name: backend
+          image: ritesh57/application-code-backend
+          ports:
             - containerPort: 5000
-           env:
-              - name: PORT
-                value: "5000"
-              - name: MONGO_CONN_STR
-                value: "mongodb://mongodb:27017/mydatabase"
+          env:
+            - name: PORT
+              value: "5000"
+            - name: MONGO_CONN_STR
+              value: "mongodb://mongodb:27017/mydatabase"
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+            failureThreshold: 3
