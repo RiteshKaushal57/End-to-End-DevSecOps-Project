@@ -7,7 +7,7 @@ RUN npm install
 
 COPY . .
 ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=http://localhost:5000/api/tasks
+ENV REACT_APP_BACKEND_URL=http://backend:5000/api/tasks
 
 RUN npm run build
 
