@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ritesh57/application-code-frontend:2
+          image: ritesh57/application-code-frontend:3
           ports:
             - containerPort: 80
           livenessProbe:
