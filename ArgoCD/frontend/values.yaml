@@ -1,0 +1,8 @@
+replicas: 1
+image:
+  repository: ritesh57/application-code-frontend
+  tag: "3"
+  imagePullPolicy: IfNotPresent
+env:
+  backendUrl: "/api/tasks"
+containerPort: 80

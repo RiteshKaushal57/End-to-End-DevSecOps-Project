@@ -1,0 +1,27 @@
+replicaCount: 1
+
+image:
+  repository: ritesh57/application-code-backend
+  tag: "2"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5000
+
+env:
+  PORT: "5000"
+  MONGO_CONN_STR: "mongodb://mongodb:27017/mydatabase"
+
+probes:
+  liveness:
+    path: /healthz
+    initialDelaySeconds: 30
+    periodSeconds: 10
+    failureThreshold: 3
+
+  readiness:
+    path: /ready
+    initialDelaySeconds: 15
+    periodSeconds: 5
+    failureThreshold: 3
