@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: mongo
+  tag: "6.0"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 27017
+  headless: true
+
+storage:
+  size: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  mountPath: /data/db
+
+podLabels:
+  app: mongodb

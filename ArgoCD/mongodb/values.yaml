@@ -1,0 +1,12 @@
+architecture: standalone
+
+auth:
+  enabled: false
+
+persistence:
+  enabled: true
+  size: 1Gi
+
+service:
+  ports:
+    mongodb: 27017
