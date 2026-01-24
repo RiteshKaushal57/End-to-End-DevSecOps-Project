@@ -3,6 +3,10 @@ architecture: standalone
 auth:
   enabled: false
 
+initdbScripts:
+  init.js: |
+    db = db.getSiblingDB("mydatabase");
+
 persistence:
   enabled: true
   size: 1Gi
