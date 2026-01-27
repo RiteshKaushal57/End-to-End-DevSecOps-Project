@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+  docker {
+    image 'ritesh57/ci-tools:latest'
+    args '-v /var/run/docker.sock:/var/run/docker.sock'
+  }
+}
 
     environment {
         REGISTRY = "ritesh57"
