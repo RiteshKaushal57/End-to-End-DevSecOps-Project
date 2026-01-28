@@ -1,10 +1,28 @@
 pipeline {
-    agent {
-  docker {
-    image 'ritesh57/ci-tools:latest'
-    args '-v /var/run/docker.sock:/var/run/docker.sock'
+  agent {
+    kubernetes {
+      yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: ci
+      image: ritesh57/ci-tools:latest
+      command:
+        - cat
+      tty: true
+      volumeMounts:
+        - name: docker-sock
+          mountPath: /var/run/docker.sock
+  volumes:
+    - name: docker-sock
+      hostPath:
+        path: /var/run/docker.sock
+"""
+      defaultContainer 'ci'
+    }
   }
-}
+
 
     environment {
         REGISTRY = "ritesh57"
