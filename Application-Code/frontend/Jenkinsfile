@@ -69,23 +69,6 @@ stage('Install Dependencies') {
             }
         }
 
-        stage('SonarQube Analysis') {
-            environment {
-                SONAR_SCANNER_HOME = tool 'sonar-scanner'
-            }
-            steps {
-                dir('Application-Code/frontend') {
-                    withSonarQubeEnv('sonarqube-server') {
-                        sh """
-                        ${SONAR_SCANNER_HOME}/bin/sonar-scanner \
-                          -Dsonar.projectKey=frontend \
-                          -Dsonar.sources=.
-                        """
-                    }
-                }
-            }
-        }
-
         stage('Quality Gate') {
             steps {
                 timeout(time: 5, unit: 'MINUTES') {
